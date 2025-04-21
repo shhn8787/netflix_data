@@ -1,0 +1,17 @@
+SUMMARY OF CHANGES MADE TO THE DATASET:
+
+- Loaded the raw Netflix dataset
+- Removed duplicate rows
+- Filled missing values:
+  - 'director' and 'cast' with 'Unknown'
+  - 'country' with 'Unknown'
+  - 'date_added' with a placeholder date ('01-Jan-2000')
+  - 'rating' and 'duration' with default values
+- Standardized columns:
+  - Converted 'type' to lowercase
+  - Formatted 'country' to title case
+- Converted the 'date_added' column to proper datetime format
+- Renamed columns to lowercase with underscores instead of spaces
+- Saved the cleaned dataset as 'cleaned_netflix.csv'
+
+The dataset is now clean, and ready for further analysis or use in machine learning tasks.

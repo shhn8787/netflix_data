@@ -1,0 +1,44 @@
+import pandas as pd
+
+# Load the dataset
+df = pd.read_csv('netflix_titles.csv')
+
+# Step 1: See basic info
+print("First 5 rows:\n", df.head())
+print("\nShape (rows, columns):", df.shape)
+
+# Step 2: Check missing values
+print("\nMissing values:\n", df.isnull().sum())
+
+# Step 3: Drop duplicates
+df = df.drop_duplicates()
+
+# Step 4: Fill missing 'director' and 'cast' with 'Unknown'
+df['director'] = df['director'].fillna('Unknown')
+df['cast'] = df['cast'].fillna('Unknown')
+
+# Step 5: Fill missing 'country' with 'Unknown'
+df['country'] = df['country'].fillna('Unknown')
+
+# Step 6: Fill missing 'date_added' with a placeholder (or drop them)
+df['date_added'] = df['date_added'].fillna('01-Jan-2000')  # or df.dropna(subset=['date_added'])
+
+# Step 7: Fill missing 'rating' and 'duration'
+df['rating'] = df['rating'].fillna('Not Rated')
+df['duration'] = df['duration'].fillna('Unknown')
+
+# Step 8: Standardize 'type' and 'country' columns
+df['type'] = df['type'].str.lower()
+df['country'] = df['country'].str.strip().str.title()
+
+# Step 9: Convert 'date_added' to datetime
+df['date_added'] = pd.to_datetime(df['date_added'], errors='coerce')
+
+# Step 10: Rename columns to lowercase with underscores
+df.columns = [col.strip().lower().replace(' ', '_') for col in df.columns]
+
+# Save the cleaned file
+df.to_csv('cleaned_netflix.csv', index=False)
+
+print("\n✅ Netflix dataset cleaned and saved as 'cleaned_netflix.csv'")
+
